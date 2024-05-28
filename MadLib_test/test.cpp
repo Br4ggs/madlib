@@ -343,3 +343,20 @@ TEST(Transpose_flips_matrix_on_diagonal, Matrix_transpose)
 	EXPECT_EQ(mat2[2][1], 6);
 	EXPECT_EQ(mat2[2][2], 9);
 }
+
+TEST(Transpose_flips_matrix_dimensions, Matrix_transpose)
+{
+	Matrix mat1(3, 1);
+	mat1[0][0] = 1;
+	mat1[1][0] = 2;
+	mat1[2][0] = 3;
+
+	Matrix mat2 = mat1.transpose();
+
+	EXPECT_EQ(mat2.getRows(), 1);
+	EXPECT_EQ(mat2.getColumns(), 3);
+	EXPECT_EQ(mat2[0][0], 1);
+	EXPECT_EQ(mat2[0][1], 2);
+	EXPECT_EQ(mat2[0][2], 3);
+
+}

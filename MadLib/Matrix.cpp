@@ -34,8 +34,8 @@ Matrix Matrix::operator+(const Matrix& mat) const
 	{
 		for (int j = 0; j < this->columns; j++)
 		{
-			int a = (*this)[i][j];
-			int b = mat[i][j];
+			float a = (*this)[i][j];
+			float b = mat[i][j];
 			result[i][j] = a + b;
 		}
 	}
@@ -56,8 +56,8 @@ Matrix Matrix::operator-(const Matrix& mat) const
 	{
 		for (int j = 0; j < this->columns; j++)
 		{
-			int a = (*this)[i][j];
-			int b = mat[i][j];
+			float a = (*this)[i][j];
+			float b = mat[i][j];
 			result[i][j] = a - b;
 		}
 	}
