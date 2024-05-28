@@ -65,6 +65,11 @@ Matrix Matrix::operator-(const Matrix& mat) const
 	return result;
 }
 
+Matrix Matrix::operator*(const Matrix& mat) const
+{
+	return Matrix(1,1);
+}
+
 Matrix Matrix::transpose() const
 {
 	Matrix result(this->columns, this->rows);

@@ -22,6 +22,7 @@ public:
 
 	Matrix operator+(const Matrix& mat) const;
 	Matrix operator-(const Matrix& mat) const;
+	Matrix operator*(const Matrix& mat) const;
 	//TODO: multiplication
 	//TODO: transpose
 	Matrix transpose() const;
