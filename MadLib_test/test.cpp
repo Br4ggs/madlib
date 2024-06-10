@@ -360,3 +360,118 @@ TEST(Transpose_flips_matrix_dimensions, Matrix_transpose)
 	EXPECT_EQ(mat2[0][2], 3);
 
 }
+
+TEST(Multiplication_multiplies_two_positive_matrices, Matrix_multiply)
+{
+	Matrix mat1(2, 2);
+	mat1[0][0] = 2;
+	mat1[0][1] = 3;
+	mat1[1][0] = 4;
+	mat1[1][1] = 5;
+	Matrix mat2(2, 2);
+	mat2[0][0] = 6;
+	mat2[0][1] = 7;
+	mat2[1][0] = 8;
+	mat2[1][1] = 9;
+
+	Matrix mat3 = mat1 * mat2;
+
+	EXPECT_EQ(mat3[0][0], 36);
+	EXPECT_EQ(mat3[0][1], 41);
+	EXPECT_EQ(mat3[1][0], 64);
+	EXPECT_EQ(mat3[1][1], 73);
+}
+
+TEST(Multiplication_throws_exception_when_matrix_columns_and_rows_are_not_equal, Matrix_multiply)
+{
+	Matrix mat1(3, 2);
+	Matrix mat2(3, 3);
+
+	EXPECT_THROW(
+		{
+			mat1 * mat2;
+		}, std::invalid_argument);
+}
+
+TEST(Multiplication_creates_a_IxN_matrix_from_a_IxM_and_MxN, Matrix_multiply)
+{
+	Matrix mat1(4, 3);
+	mat1[0][0] = 2;
+	mat1[0][1] = 3;
+	mat1[0][2] = 4;
+	mat1[1][0] = 5;
+	mat1[1][1] = 6;
+	mat1[1][2] = 7;
+	mat1[2][0] = 8;
+	mat1[2][1] = 9;
+	mat1[2][2] = 19;
+	mat1[3][0] = 11;
+	mat1[3][1] = 12;
+	mat1[3][2] = 13;
+	Matrix mat2(3, 5);
+	mat2[0][0] = 14;
+	mat2[0][1] = 15;
+	mat2[0][2] = 16;
+	mat2[0][3] = 17;
+	mat2[0][4] = 18;
+	mat2[1][0] = 19;
+	mat2[1][1] = 20;
+	mat2[1][2] = 21;
+	mat2[1][3] = 22;
+	mat2[1][4] = 23;
+	mat2[2][0] = 24;
+	mat2[2][1] = 25;
+	mat2[2][2] = 26;
+	mat2[2][3] = 27;
+	mat2[2][4] = 28;
+
+	Matrix mat3 = mat1 * mat2;
+	EXPECT_EQ(mat3.getRows(), 4);
+	EXPECT_EQ(mat3.getColumns(), 5);
+	EXPECT_EQ(mat3[0][0], 181);
+	EXPECT_EQ(mat3[0][1], 190);
+	EXPECT_EQ(mat3[0][2], 199);
+	EXPECT_EQ(mat3[0][3], 208);
+	EXPECT_EQ(mat3[0][4], 217);
+	EXPECT_EQ(mat3[1][0], 352);
+	EXPECT_EQ(mat3[1][1], 370);
+	EXPECT_EQ(mat3[1][2], 388);
+	EXPECT_EQ(mat3[1][3], 406);
+	EXPECT_EQ(mat3[1][4], 424);
+	EXPECT_EQ(mat3[2][0], 739);
+	EXPECT_EQ(mat3[2][1], 775);
+	EXPECT_EQ(mat3[2][2], 811);
+	EXPECT_EQ(mat3[2][3], 847);
+	EXPECT_EQ(mat3[2][4], 883);
+	EXPECT_EQ(mat3[3][0], 694);
+	EXPECT_EQ(mat3[3][1], 730);
+	EXPECT_EQ(mat3[3][2], 766);
+	EXPECT_EQ(mat3[3][3], 802);
+	EXPECT_EQ(mat3[3][4], 838);
+}
+
+TEST(Multiplication_multiplies_matrices_in_the_correct_order, Matrix_multiply)
+{
+	Matrix mat1(2, 2);
+	mat1[0][0] = 2;
+	mat1[0][1] = 3;
+	mat1[1][0] = 4;
+	mat1[1][1] = 5;
+	Matrix mat2(2, 2);
+	mat2[0][0] = 6;
+	mat2[0][1] = 7;
+	mat2[1][0] = 8;
+	mat2[1][1] = 9;
+	Matrix mat3(2, 2);
+	mat3[0][0] = 10;
+	mat3[0][1] = 11;
+	mat3[1][0] = 12;
+	mat3[1][1] = 13;
+
+	Matrix mat4 = mat1 * mat2 * mat3;
+
+	EXPECT_EQ(mat4[0][0], 852);
+	EXPECT_EQ(mat4[0][1], 929);
+	EXPECT_EQ(mat4[1][0], 1516);
+	EXPECT_EQ(mat4[1][1], 1653);
+}
