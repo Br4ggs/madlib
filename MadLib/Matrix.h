@@ -22,10 +22,12 @@ public:
 
 	Matrix operator+(const Matrix& mat) const;
 	Matrix operator-(const Matrix& mat) const;
-	//TODO: multiplication
-	//TODO: transpose
+	Matrix operator*(const Matrix& mat) const;
+
 	Matrix transpose() const;
 	//TODO: inverse
+	//TODO: identity matrix
+	//TODO: debug print
 
 private:
 	int rows;

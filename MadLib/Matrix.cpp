@@ -34,8 +34,8 @@ Matrix Matrix::operator+(const Matrix& mat) const
 	{
 		for (int j = 0; j < this->columns; j++)
 		{
-			int a = (*this)[i][j];
-			int b = mat[i][j];
+			float a = (*this)[i][j];
+			float b = mat[i][j];
 			result[i][j] = a + b;
 		}
 	}
@@ -56,9 +56,35 @@ Matrix Matrix::operator-(const Matrix& mat) const
 	{
 		for (int j = 0; j < this->columns; j++)
 		{
-			int a = (*this)[i][j];
-			int b = mat[i][j];
+			float a = (*this)[i][j];
+			float b = mat[i][j];
 			result[i][j] = a - b;
+		}
+	}
+
+	return result;
+}
+
+Matrix Matrix::operator*(const Matrix& mat) const
+{
+	if (this->columns != mat.rows)
+		throw std::invalid_argument("columns of first matrix and rows of second matrix do not match");
+
+	//naive implementation, Could be interesting to change to something more efficient
+	Matrix result(this->rows, mat.columns);
+	for (int i = 0; i < result.rows; i++)
+	{
+		for (int j = 0; j < result.columns; j++)
+		{
+			float val = 0;
+			for (int x = 0; x < this->columns; x++)
+			{
+				float a = (*this)[i][x];
+				float b = mat[x][j];
+				val += a * b;
+			}
+
+			result[i][j] = val;
 		}
 	}
 
