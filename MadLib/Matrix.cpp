@@ -106,6 +106,35 @@ Matrix Matrix::transpose() const
 	return result;
 }
 
+Matrix Matrix::submatrix(unsigned int row, unsigned int column) const
+{
+	if (row >= this->rows)
+		throw std::invalid_argument("Specified row is out of range");
+	if (column >= this->columns)
+		throw std::invalid_argument("Specified column is out of range");
+
+	Matrix mat(this->rows - 1, this->columns - 1);
+
+	unsigned int resultingRow = 0;
+	for (int i = 0; i < this->rows; i++)
+	{
+		if (i == row) continue;
+
+		unsigned int resultingColumn = 0;
+		for (int j = 0; j < this->columns; j++)
+		{
+			if (j == column) continue;
+
+			mat[resultingRow][resultingColumn] = (*this)[i][j];
+			resultingColumn++;
+		}
+
+		resultingRow++;
+	}
+
+	return mat;
+}
+
 int Matrix::getRows()
 {
 	return rows;
@@ -115,4 +144,3 @@ int Matrix::getColumns()
 {
 	return columns;
 }
-
