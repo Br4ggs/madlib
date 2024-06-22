@@ -511,5 +511,61 @@ TEST(Submatrix_throws_exception_when_specified_row_or_column_is_out_of_range, Ma
 
 TEST(Submatrix_removes_specified_rows_and_columns_and_returns_new_matrix, Matrix_submatrix)
 {
+	//TODO when we add methods for removing multiple rows and columns
+}
 
+TEST(Determinant_correctly_calculated_determinant_for_2x2_matrix, Matrix_determinant)
+{
+	Matrix mat(2, 2);
+	mat[0][0] = 2;
+	mat[0][1] = 3;
+	mat[1][0] = 2;
+	mat[1][1] = 3;
+
+	int det = mat.determinant();
+
+	EXPECT_EQ(det, 0);
+}
+
+TEST(Determinant_correctly_calculates_determinant_for_3x3_matrix, Matrix_determinant)
+{
+	Matrix mat(3, 3);
+	mat[0][0] = 2;
+	mat[0][1] = 5;
+	mat[0][2] = -1;
+	mat[1][0] = 4;
+	mat[1][1] = 9;
+	mat[1][2] = 6;
+	mat[2][0] = 7;
+	mat[2][1] = 8;
+	mat[2][2] = 3;
+
+	int det = mat.determinant();
+
+	EXPECT_EQ(det, 139);
+}
+
+TEST(Determinant_correctly_calculates_determinant_for_4x4_matrix, Matrix_determinant)
+{
+	Matrix mat(4, 4);
+	mat[0][0] = 1;
+	mat[0][1] = 3;
+	mat[0][2] = 5;
+	mat[0][3] = 9;
+	mat[1][0] = 1;
+	mat[1][1] = 3;
+	mat[1][2] = 1;
+	mat[1][3] = 7;
+	mat[2][0] = 4;
+	mat[2][1] = 3;
+	mat[2][2] = 9;
+	mat[2][3] = 7;
+	mat[3][0] = 5;
+	mat[3][1] = 2;
+	mat[3][2] = 0;
+	mat[3][3] = 9;
+
+	int det = mat.determinant();
+
+	EXPECT_EQ(det, -376);
 }

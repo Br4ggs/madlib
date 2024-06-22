@@ -135,12 +135,41 @@ Matrix Matrix::submatrix(unsigned int row, unsigned int column) const
 	return mat;
 }
 
-int Matrix::getRows()
+int Matrix::determinant() const
+{
+	if (this->rows != this->columns)
+		throw std::invalid_argument("Matrix is non-square");
+
+	return det(*this);
+}
+
+int Matrix::det(const Matrix mat) const
+{
+	if (mat.rows == 2 && mat.columns == 2)
+	{
+		return (mat[0][0] * mat[1][1]) - (mat[1][0] * mat[0][1]);
+	}
+
+	else
+	{
+		int result = 0;
+		int sign = 1;
+		for (int i = 0; i < mat.columns; i++)
+		{
+			result += sign * (mat[0][i] * det(mat.submatrix(0, i)));
+			sign *= -1;
+		}
+
+		return result;
+	}
+}
+
+int Matrix::getRows() const
 {
 	return rows;
 }
 
-int Matrix::getColumns()
+int Matrix::getColumns() const
 {
 	return columns;
 }
