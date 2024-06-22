@@ -475,3 +475,41 @@ TEST(Multiplication_multiplies_matrices_in_the_correct_order, Matrix_multiply)
 	EXPECT_EQ(mat4[1][0], 1516);
 	EXPECT_EQ(mat4[1][1], 1653);
 }
+
+TEST(Submatrix_removes_a_single_row_and_column, Matrix_submatrix)
+{
+	Matrix mat(3, 3);
+	mat[0][0] = 1;
+	mat[0][1] = 2;
+	mat[0][2] = 3;
+	mat[1][0] = 4;
+	mat[1][1] = 5;
+	mat[1][2] = 6;
+	mat[2][0] = 7;
+	mat[2][1] = 8;
+	mat[2][2] = 9;
+
+	Matrix submat = mat.submatrix(1, 2);
+
+	EXPECT_EQ(submat.getRows(), 2);
+	EXPECT_EQ(submat.getColumns(), 2);
+	EXPECT_EQ(submat[0][0], 1);
+	EXPECT_EQ(submat[0][1], 2);
+	EXPECT_EQ(submat[1][0], 7);
+	EXPECT_EQ(submat[1][1], 8);
+}
+
+TEST(Submatrix_throws_exception_when_specified_row_or_column_is_out_of_range, Matrix_submatrix)
+{
+	Matrix mat(2, 2);
+
+	EXPECT_THROW(
+		{
+			mat.submatrix(2, -1);
+		}, std::invalid_argument);
+}
+
+TEST(Submatrix_removes_specified_rows_and_columns_and_returns_new_matrix, Matrix_submatrix)
+{
+
+}

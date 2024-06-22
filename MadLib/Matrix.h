@@ -24,7 +24,21 @@ public:
 	Matrix operator-(const Matrix& mat) const;
 	Matrix operator*(const Matrix& mat) const;
 
+	/// <summary>
+	/// Returns the transposition of the matrix
+	/// </summary>
+	/// <returns>The transposed matrix</returns>
 	Matrix transpose() const;
+
+	/// <summary>
+	/// Specific submatrix routine implementation that is for determinant calculations.
+	/// Deletes a single row and column and returns the result
+	/// </summary>
+	/// <param name="row">The row to be deleted</param>
+	/// <param name="column">The column to be deleted</param>
+	/// <returns>The resulting matrix</returns>
+	Matrix submatrix(const unsigned int row, const unsigned int column) const;
+
 	//TODO: inverse
 	//TODO: identity matrix
 	//TODO: debug print
