@@ -569,3 +569,13 @@ TEST(Determinant_correctly_calculates_determinant_for_4x4_matrix, Matrix_determi
 
 	EXPECT_EQ(det, -376);
 }
+
+TEST(Determinant_throws_exception_when_matrix_is_non_square, Matrix_determinant)
+{
+	Matrix mat(3, 4);
+
+	EXPECT_THROW(
+		{
+			mat.determinant();
+		}, std::invalid_argument);
+}
