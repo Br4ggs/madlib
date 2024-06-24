@@ -514,7 +514,7 @@ TEST(Submatrix_removes_specified_rows_and_columns_and_returns_new_matrix, Matrix
 	//TODO when we add methods for removing multiple rows and columns
 }
 
-TEST(Determinant_correctly_calculated_determinant_for_2x2_matrix, Matrix_determinant)
+TEST(Determinant_correctly_calculates_determinant_for_2x2_matrix, Matrix_determinant)
 {
 	Matrix mat(2, 2);
 	mat[0][0] = 2;
@@ -525,6 +525,19 @@ TEST(Determinant_correctly_calculated_determinant_for_2x2_matrix, Matrix_determi
 	int det = mat.determinant();
 
 	EXPECT_EQ(det, 0);
+}
+
+TEST(Determinant_correctly_calculates_determinant_for_2x2_float_matrix, Matrix_determinant)
+{
+	Matrix mat(2, 2);
+	mat[0][0] = 1.0f/2.0f;
+	mat[0][1] = 2.0f/3.0f;
+	mat[1][0] = 3.0f/8.0f;
+	mat[1][1] = 4.0f/16.0f;
+
+	float det = mat.determinant();
+
+	EXPECT_EQ(det, -1.0f/8.0f);
 }
 
 TEST(Determinant_correctly_calculates_determinant_for_3x3_matrix, Matrix_determinant)
@@ -579,3 +592,28 @@ TEST(Determinant_throws_exception_when_matrix_is_non_square, Matrix_determinant)
 			mat.determinant();
 		}, std::invalid_argument);
 }
+
+//TEST(Inverse_calculates_the_inverse_of_a_2x2_matrix, Matrix_inverse)
+//{
+//	Matrix mat(2, 2);
+//	mat[0][0] = 1;
+//	mat[0][1] = 2;
+//	mat[1][0] = 3;
+//	mat[1][1] = 4;
+//
+//	Matrix inv = mat.inverse();
+//
+//	EXPECT_EQ(inv[0][0], -2);
+//	EXPECT_EQ(inv[0][1], 1);
+//	EXPECT_EQ(inv[1][0], 3/2);
+//	EXPECT_EQ(inv[1][1], -1/2);
+//
+//	//...
+//}
+
+//TEST(Inverse_calculates_the_inverse_of_a_3x3_matrix, Matrix_inverse)
+//{
+//
+//}
+
+//singular matrix test

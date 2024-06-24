@@ -135,7 +135,7 @@ Matrix Matrix::submatrix(unsigned int row, unsigned int column) const
 	return mat;
 }
 
-int Matrix::determinant() const
+float Matrix::determinant() const
 {
 	if (this->rows != this->columns)
 		throw std::invalid_argument("Matrix is non-square");
@@ -143,7 +143,7 @@ int Matrix::determinant() const
 	return det(*this);
 }
 
-int Matrix::det(const Matrix mat) const
+float Matrix::det(const Matrix mat) const
 {
 	if (mat.rows == 2 && mat.columns == 2)
 	{
@@ -152,15 +152,37 @@ int Matrix::det(const Matrix mat) const
 
 	else
 	{
-		int result = 0;
+		float result = 0;
 		int sign = 1;
 		for (int i = 0; i < mat.columns; i++)
 		{
-			result += sign * (mat[0][i] * det(mat.submatrix(0, i)));
+			result += (float)sign * (mat[0][i] * det(mat.submatrix(0, i)));
 			sign *= -1;
 		}
 
 		return result;
+	}
+}
+
+Matrix Matrix::inverse() const
+{
+	if (this->rows != this->columns)
+		throw std::invalid_argument("Matrix is non-square");
+
+	float determinant = this->determinant();
+
+	if (determinant == 0)
+		throw std::invalid_argument("Matrix is singular (determinant is 0)");
+
+	if (this->rows == 2)
+	{
+		//add scalar multiplication plox
+		float recip = 1 / determinant;
+		Matrix inv(2, 2);
+		inv[0][0] = recip * (*this)[1][1];
+		inv[0][1] = recip * -1 * (*this)[0][1];
+		inv[1][0] = recip * -1 * (*this)[1][0];
+		inv[1][1] = recip * (*this)[0][0];
 	}
 }
 

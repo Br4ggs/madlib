@@ -39,9 +39,13 @@ public:
 	/// <returns>The resulting matrix</returns>
 	Matrix submatrix(const unsigned int row, const unsigned int column) const;
 
-	int determinant() const;
+	float determinant() const;
+
+	Matrix inverse() const;
 
 	//TODO: inverse
+	//see https://www.mathsisfun.com/algebra/matrix-inverse-minors-cofactors-adjugate.html
+	
 	//TODO: identity matrix
 	//TODO: debug print
 
@@ -52,7 +56,7 @@ private:
 	// vectors are used to allow construction during initialization
 	std::vector<std::vector<float>> components;
 
-	int det(const Matrix mat) const;
+	float det(const Matrix mat) const;
 };
 
 #endif // !MATRIX_H
