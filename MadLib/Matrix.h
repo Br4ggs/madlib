@@ -12,8 +12,8 @@ public:
 	Matrix(int rows, int columns); //Unsigned?
 	Matrix() = delete;
 
-	int getRows();
-	int getColumns();
+	int getRows() const;
+	int getColumns() const;
 
 
 	//https://stackoverflow.com/questions/33642050/overloading-subscript-operators-for-specific-read-and-write-operations
@@ -39,6 +39,8 @@ public:
 	/// <returns>The resulting matrix</returns>
 	Matrix submatrix(const unsigned int row, const unsigned int column) const;
 
+	int determinant() const;
+
 	//TODO: inverse
 	//TODO: identity matrix
 	//TODO: debug print
@@ -49,6 +51,8 @@ private:
 
 	// vectors are used to allow construction during initialization
 	std::vector<std::vector<float>> components;
+
+	int det(const Matrix mat) const;
 };
 
 #endif // !MATRIX_H
