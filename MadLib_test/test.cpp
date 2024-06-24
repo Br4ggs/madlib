@@ -593,27 +593,54 @@ TEST(Determinant_throws_exception_when_matrix_is_non_square, Matrix_determinant)
 		}, std::invalid_argument);
 }
 
-//TEST(Inverse_calculates_the_inverse_of_a_2x2_matrix, Matrix_inverse)
-//{
-//	Matrix mat(2, 2);
-//	mat[0][0] = 1;
-//	mat[0][1] = 2;
-//	mat[1][0] = 3;
-//	mat[1][1] = 4;
-//
-//	Matrix inv = mat.inverse();
-//
-//	EXPECT_EQ(inv[0][0], -2);
-//	EXPECT_EQ(inv[0][1], 1);
-//	EXPECT_EQ(inv[1][0], 3/2);
-//	EXPECT_EQ(inv[1][1], -1/2);
-//
-//	//...
-//}
+TEST(Inverse_calculates_the_inverse_of_a_2x2_matrix, Matrix_inverse)
+{
+	Matrix mat(2, 2);
+	mat[0][0] = 1;
+	mat[0][1] = 2;
+	mat[1][0] = 3;
+	mat[1][1] = 4;
 
-//TEST(Inverse_calculates_the_inverse_of_a_3x3_matrix, Matrix_inverse)
-//{
-//
-//}
+	Matrix inv = mat.inverse();
+
+	EXPECT_EQ(inv[0][0], -2.0f);
+	EXPECT_EQ(inv[0][1], 1.0f);
+	EXPECT_EQ(inv[1][0], 3.0f/2.0f);
+	EXPECT_EQ(inv[1][1], -1.0f/2.0f);
+
+	Matrix res = mat * inv;
+
+	EXPECT_EQ(res[0][0], 1);
+	EXPECT_EQ(res[0][1], 0);
+	EXPECT_EQ(res[1][0], 0);
+	EXPECT_EQ(res[1][1], 1);
+}
+
+TEST(Inverse_calculates_the_inverse_of_a_3x3_matrix, Matrix_inverse)
+{
+	Matrix mat(3, 3);
+	mat[0][0] = 3;
+	mat[0][1] = 0;
+	mat[0][2] = 2;
+	mat[1][0] = 2;
+	mat[1][1] = 0;
+	mat[1][2] = -2;
+	mat[2][0] = 0;
+	mat[2][1] = 1;
+	mat[2][2] = 1;
+
+	Matrix inv = mat.inverse();
+	EXPECT_EQ(inv[0][0],  0.2f);
+	EXPECT_EQ(inv[0][1],  0.2f);
+	EXPECT_EQ(inv[0][2],  0.0f);
+	EXPECT_EQ(inv[1][0], -0.2f);
+	EXPECT_EQ(inv[1][1],  0.3f);
+	EXPECT_EQ(inv[1][2],  1.0f);
+	EXPECT_EQ(inv[2][0],  0.2f);
+	EXPECT_EQ(inv[2][1], -0.3f);
+	EXPECT_EQ(inv[2][2],  0);
+}
 
 //singular matrix test
+
+//1x1 matrix test?

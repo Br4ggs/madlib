@@ -183,6 +183,50 @@ Matrix Matrix::inverse() const
 		inv[0][1] = recip * -1 * (*this)[0][1];
 		inv[1][0] = recip * -1 * (*this)[1][0];
 		inv[1][1] = recip * (*this)[0][0];
+
+		return inv;
+	}
+	if (this->rows > 2)
+	{
+		Matrix inv(this->rows, this->columns);
+
+		//step 1: calculate the matrix of minors
+		for (int i = 0; i < this->rows; i++)
+		{
+			for (int j = 0; j < this->columns; j++)
+			{
+				inv[i][j] = this->submatrix(i, j).determinant();
+			}
+		}
+
+		//step 2: apply cofactors
+		int sign = 1;
+		for (int i = 0; i < this->rows; i++)
+		{
+			for (int j = 0; j < this->columns; j++)
+			{
+				inv[i][j] *= sign;
+				sign *= -1;
+			}
+		}
+
+		//step 3: calculate the adjugate
+		inv = inv.transpose();
+
+		//step 4: find determinant of original matrix
+		float det = this->determinant();
+
+		//step 5: apply 1/det to adjugate matrix
+		//nonononono: please do scalar multiplication * overload
+		for (int i = 0; i < this->rows; i++)
+		{
+			for (int j = 0; j < this->columns; j++)
+			{
+				inv[i][j] *= 1.0f/det;
+			}
+		}
+
+		return inv;
 	}
 }
 
