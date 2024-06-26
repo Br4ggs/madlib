@@ -41,6 +41,11 @@ public:
 
 	float determinant() const;
 
+	/// <summary>
+	/// Calculates the inverse of this matrix using the analytic solution
+	/// i.e. by calculating the minors cofactors and adjugate
+	/// </summary>
+	/// <returns>The inverse of the matrix</returns>
 	Matrix inverse() const;
 
 	//TODO: inverse

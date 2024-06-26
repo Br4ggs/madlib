@@ -643,4 +643,6 @@ TEST(Inverse_calculates_the_inverse_of_a_3x3_matrix, Matrix_inverse)
 
 //singular matrix test
 
-//1x1 matrix test?
+//1x1 matrix test? -> throws exception
+
+//4x4 matrix test

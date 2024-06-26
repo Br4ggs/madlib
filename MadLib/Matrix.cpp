@@ -164,6 +164,8 @@ float Matrix::det(const Matrix mat) const
 	}
 }
 
+//This method for calculating the matrix is rather slow for large matrices
+//maybe in the future implement gauss-jordan elimination
 Matrix Matrix::inverse() const
 {
 	if (this->rows != this->columns)
