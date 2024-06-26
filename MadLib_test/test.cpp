@@ -641,6 +641,20 @@ TEST(Inverse_calculates_the_inverse_of_a_3x3_matrix, Matrix_inverse)
 	EXPECT_EQ(inv[2][2],  0);
 }
 
+TEST(Inverse_throws_exception_when_matrix_is_singular, Matrix_inverse)
+{
+	Matrix mat(2, 2);
+	mat[0][0] = 3;
+	mat[0][1] = 4;
+	mat[1][0] = 6;
+	mat[1][1] = 8;
+
+	EXPECT_THROW(
+		{
+			mat.inverse();
+		}, std::invalid_argument);
+}
+
 //singular matrix test
 
 //1x1 matrix test? -> throws exception
