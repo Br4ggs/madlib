@@ -604,8 +604,8 @@ TEST(Inverse_calculates_the_inverse_of_a_2x2_matrix, Matrix_inverse)
 	Matrix inv = mat.inverse();
 
 	EXPECT_EQ(inv[0][0], -2.0f);
-	EXPECT_EQ(inv[0][1], 1.0f);
-	EXPECT_EQ(inv[1][0], 3.0f/2.0f);
+	EXPECT_EQ(inv[0][1],  1.0f);
+	EXPECT_EQ(inv[1][0],  3.0f/2.0f);
 	EXPECT_EQ(inv[1][1], -1.0f/2.0f);
 
 	Matrix res = mat * inv;
@@ -630,6 +630,7 @@ TEST(Inverse_calculates_the_inverse_of_a_3x3_matrix, Matrix_inverse)
 	mat[2][2] = 1;
 
 	Matrix inv = mat.inverse();
+
 	EXPECT_EQ(inv[0][0],  0.2f);
 	EXPECT_EQ(inv[0][1],  0.2f);
 	EXPECT_EQ(inv[0][2],  0.0f);
@@ -639,6 +640,115 @@ TEST(Inverse_calculates_the_inverse_of_a_3x3_matrix, Matrix_inverse)
 	EXPECT_EQ(inv[2][0],  0.2f);
 	EXPECT_EQ(inv[2][1], -0.3f);
 	EXPECT_EQ(inv[2][2],  0);
+
+	Matrix res = mat * inv;
+
+	EXPECT_EQ(res[0][0], 1);
+	EXPECT_EQ(res[0][1], 0);
+	EXPECT_EQ(res[0][2], 0);
+	EXPECT_EQ(res[1][0], 0);
+	EXPECT_EQ(res[1][1], 1);
+	EXPECT_EQ(res[1][2], 0);
+	EXPECT_EQ(res[2][0], 0);
+	EXPECT_EQ(res[2][1], 0);
+	EXPECT_EQ(res[2][2], 1);
+}
+
+TEST(Inverse_calculates_another_inverse_of_a_3x3_matrix, Matrix_inverse)
+{
+	Matrix mat(3, 3);
+	mat[0][0] = 1;
+	mat[0][1] = 2;
+	mat[0][2] = 3;
+	mat[1][0] = 4;
+	mat[1][1] = 5;
+	mat[1][2] = 6;
+	mat[2][0] = 7;
+	mat[2][1] = 2;
+	mat[2][2] = 9;
+
+	Matrix inv = mat.inverse();
+
+	EXPECT_EQ(inv[0][0], -11.0f/12.0f);
+	EXPECT_EQ(inv[0][1],  1.0f/3.0f);
+	EXPECT_EQ(inv[0][2],  1.0f/12.0f);
+	EXPECT_EQ(inv[1][0], -1.0f/6.0f);
+	EXPECT_EQ(inv[1][1],  1.0f/3.0f);
+	EXPECT_EQ(inv[1][2], -1.0f/6.0f);
+	EXPECT_EQ(inv[2][0],  3.0f/4.0f);
+	EXPECT_EQ(inv[2][1], -1.0f/3.0f);
+	EXPECT_EQ(inv[2][2],  1.0f/12.0f);
+
+	Matrix res = mat * inv;
+
+	EXPECT_EQ(res[0][0], 1);
+	EXPECT_EQ(res[0][1], 0);
+	EXPECT_EQ(res[0][2], 0);
+	EXPECT_EQ(res[1][0], 0);
+	EXPECT_EQ(res[1][1], 1);
+	EXPECT_EQ(res[1][2], 0);
+	EXPECT_EQ(res[2][0], 0);
+	EXPECT_EQ(res[2][1], 0);
+	EXPECT_EQ(res[2][2], 1);
+}
+
+TEST(Inverse_calculates_the_inverse_of_a_4x4_matrix, Matrix_inverse)
+{
+	Matrix mat(4, 4);
+	mat[0][0] = 1;
+	mat[0][1] = 3;
+	mat[0][2] = 5;
+	mat[0][3] = 9;
+	mat[1][0] = 1;
+	mat[1][1] = 3;
+	mat[1][2] = 1;
+	mat[1][3] = 7;
+	mat[2][0] = 4;
+	mat[2][1] = 3;
+	mat[2][2] = 9;
+	mat[2][3] = 7;
+	mat[3][0] = 5;
+	mat[3][1] = 2;
+	mat[3][2] = 0;
+	mat[3][3] = 9;
+
+	Matrix inv = mat.inverse();
+
+	EXPECT_EQ(inv[0][0], -13.0f/47.0f);
+	EXPECT_EQ(inv[0][1],  2.0f/47.0f);
+	EXPECT_EQ(inv[0][2],  7.0f/47.0f);
+	EXPECT_EQ(inv[0][3],  6.0f/47.0f);
+	EXPECT_EQ(inv[1][0], -5.0f/8.0f);
+	EXPECT_EQ(inv[1][1],  7.0f/8.0f);
+	EXPECT_EQ(inv[1][2],  1.0f/4.0f);
+	EXPECT_EQ(inv[1][3], -1.0f/4.0f);
+	EXPECT_EQ(inv[2][0],  39.0f/376.0f);
+	EXPECT_EQ(inv[2][1], -53.0f/376.0f);
+	EXPECT_EQ(inv[2][2],  13.0f/188.0f);
+	EXPECT_EQ(inv[2][3], -9.0f/188.0f);
+	EXPECT_EQ(inv[3][0],  55.0f/188.0f);
+	EXPECT_EQ(inv[3][1], -41.0f/188.0f);
+	EXPECT_EQ(inv[3][2], -13.0f/94.0f);
+	EXPECT_EQ(inv[3][3],  9.0f/94.0f);
+
+	Matrix res = mat * inv;
+
+	EXPECT_EQ(res[0][0], 1);
+	EXPECT_EQ(res[0][1], 0);
+	EXPECT_EQ(res[0][2], 0);
+	EXPECT_EQ(res[0][3], 0);
+	EXPECT_EQ(res[1][0], 0);
+	EXPECT_EQ(res[1][1], 1);
+	EXPECT_EQ(res[1][2], 0);
+	EXPECT_EQ(res[1][3], 0);
+	EXPECT_EQ(res[2][0], 0);
+	EXPECT_EQ(res[2][1], 0);
+	EXPECT_EQ(res[2][2], 1);
+	EXPECT_EQ(res[2][3], 0);
+	EXPECT_EQ(res[3][0], 0);
+	EXPECT_EQ(res[3][1], 0);
+	EXPECT_EQ(res[3][2], 0);
+	EXPECT_EQ(res[3][3], 1);
 }
 
 TEST(Inverse_throws_exception_when_matrix_is_singular, Matrix_inverse)
@@ -654,8 +764,6 @@ TEST(Inverse_throws_exception_when_matrix_is_singular, Matrix_inverse)
 			mat.inverse();
 		}, std::invalid_argument);
 }
-
-//singular matrix test
 
 //1x1 matrix test? -> throws exception
 
