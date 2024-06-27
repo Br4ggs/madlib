@@ -679,7 +679,7 @@ TEST(Inverse_calculates_another_inverse_of_a_3x3_matrix, Matrix_inverse)
 	EXPECT_EQ(inv[2][1], -1.0f/3.0f);
 	EXPECT_EQ(inv[2][2],  1.0f/12.0f);
 
-	Matrix res = mat * inv;
+	Matrix res = mat * inv; //problem occurs here
 
 	EXPECT_EQ(res[0][0], 1);
 	EXPECT_EQ(res[0][1], 0);
@@ -687,9 +687,11 @@ TEST(Inverse_calculates_another_inverse_of_a_3x3_matrix, Matrix_inverse)
 	EXPECT_EQ(res[1][0], 0);
 	EXPECT_EQ(res[1][1], 1);
 	EXPECT_EQ(res[1][2], 0);
-	EXPECT_EQ(res[2][0], 0);
+	EXPECT_EQ(res[2][0], 0); //actually -4.76837158e-07, classing floating point arithmetic error
 	EXPECT_EQ(res[2][1], 0);
 	EXPECT_EQ(res[2][2], 1);
+
+	//straighforward solution: upcast to integer for fixed precision arithmetic?
 }
 
 TEST(Inverse_calculates_the_inverse_of_a_4x4_matrix, Matrix_inverse)
